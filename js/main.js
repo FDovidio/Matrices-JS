@@ -12,7 +12,7 @@ const finaliza = () => {
     if (sumaTotal !== 0) {
         alert(`Usted llevara \n ${listaFinal}`)
         let factura = prompt("Necesita factura? Escriba SI o NO").toLowerCase()
-        if ((factura == si) || (factura == sí)) {
+        if ((factura == "si") || (factura == "sí")) {
             let totalIva = sumaTotal * 1.21;
             alert(`LLevara \n ${listaFinal} \n Total final: $${totalIva} `)
         } else {
