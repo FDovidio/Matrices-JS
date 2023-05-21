@@ -39,7 +39,7 @@ const finaliza = () => {
 } else {
     alert("No haz agregado nada a tu compra");
   }
-}
+};
 
 while (isNaN(eleccionUser)) {
     alert("Ingresaste un valor no numerico, reintentalo");
