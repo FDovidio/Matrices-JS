@@ -18,19 +18,27 @@ const carrito = [];
 const articulosElegidosStock = [];
 let sumaTotal = 0;
 
-
-
-
-const finaliza = () => {
-    if (sumaTotal !== 0) {
-        alert(`Usted llevara \n ${listaFinal}`)
-        let factura = prompt("Necesita factura? Escriba SI o NO").toLowerCase()
-        if ((factura == si) || (factura == sí)) {
-            let totalIva = sumaTotal * 1.21;
-            alert(`LLevara \n ${listaFinal} \n Total final: $${totalIva} `)
-        } else {
-            alert(`Llevara \n ${listaFinal} \n Total final: $${sumaTotal} `)
-        }
+function finaliza() {
+  if (sumaTotal !== 0) {
+    const carritoMostrado = carrito.map(function (articulo) {
+      return articulo.nombre;
+    });
+    const carritoString = carritoMostrado.join(" - \n -  ");
+    alert(`Usted llevara ${carritoMostrado}`);
+    let factura = prompt("Necesita factura? Escriba SI o NO").toLowerCase();
+    const fecha = new Date();
+    if (factura == "si" || factura == "sí") {
+      let nombreUser = prompt("Ingresa tu nombre");
+      if (nombreUser !== "") {
+        alert(
+          `${fecha.toLocaleString()}  \n ${nombreUser}: \n ${carritoString} \n Total final: $ ${
+            sumaTotal * 1.21
+          }`
+        );
+      } else {
+        alert("Escriba un nombre");
+        nombreUser = prompt("Ingresa tu nombre");
+      }
     } else {
       alert(
         `${fecha.toLocaleString()} \n ${nombreUser}: \n ${carritoString} \n Total final: $${sumaTotal} `
@@ -39,7 +47,7 @@ const finaliza = () => {
   } else {
     alert("No haz agregado nada a tu compra");
   }
-}
+};
 
 while (isNaN(eleccionUser)) {
   alert("Ingresaste un valor no numerico, reintentalo");
