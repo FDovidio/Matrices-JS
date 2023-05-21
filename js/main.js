@@ -1,98 +1,85 @@
-class Item{
-    constructor(id, nombre, precio, stock){
-        this.id = id,
-        this.nombre = nombre,
-        this.precio = precio,
-        this.stock = stock
-    }
-    restaStock(){;
-        this.stock = this.stock - 1;
-    }
-}
+const listaArticulos = [
+  { nombre: "Yerba", id: 1, precio: 1000, stock: 200 },
+  { nombre: "Termo", id: 2, precio: 10000, stock: 70 },
+  { nombre: "Mate", id: 3, precio: 5000, stock: 150 },
+];
 
-const item1 = new Item(1, "Yerba", 1000, 100);
-const item2 = new Item(2, "Termo", 1000, 50);
-const item3 = new Item(3, "Mate", 500, 100);
+const listaTienda = `Actualemte tenemos en stock \n
+                    ${listaArticulos[0].id} - ${listaArticulos[0].nombre} por $${listaArticulos[0].precio} 
+                    ${listaArticulos[1].id} - ${listaArticulos[1].nombre} por $${listaArticulos[1].precio}
+                    ${listaArticulos[2].id} - ${listaArticulos[2].nombre} por $${listaArticulos[2].precio}
+                    0 - Finalizar la compra`;
 
+let eleccionUser = parseInt(
+  prompt(`Indique el numero del articulo que desea comprar :\n ${listaTienda}`)
+);
 
-let stockTienda = `Actualemte tenemos en stock \n
-                    ${item1.id} - ${item1.nombre} por $${item1.precio}
-                    ${item2.id} - ${item2.nombre} por $${item2.precio}
-                    ${item3.id} - ${item3.nombre} por $${item3.precio}
-                    0 - Finalizar la compra`
-
-
-
-
-let itemUser = parseInt(prompt(`Indique el numero del articulo que desea comprar :\n ${stockTienda}`))
-
-
-
-let listaFinal = ""
+const carrito = [];
+const articulosElegidosStock = [];
 let sumaTotal = 0;
 
-function stockValidado(cantidad){
-    if ((itemUser== 1) && (cantidad <=100) ){
-        return true;
-    }else if ((itemUser==2)&& (cantidad<=50)) {
-    return true;
-   }else if ((itemUser==3)&& (cantidad<=100)) {
-    return true;
-   }else {
-    return false
-   }
-}
-
-
-const finaliza = () => {
-    if (sumaTotal !== 0) {
-        alert(`Usted llevara \n ${listaFinal}`)
-        let factura = prompt("Necesita factura? Escriba SI o NO").toLowerCase()
-        if ((factura == "si") || (factura == "sí")) {
-            let totalIva = sumaTotal * 1.21;
-            let nombreUser = prompt("Ingresa tu nombre")
-            alert(`${nombreUser} levara \n ${listaFinal} \n Total final: $${totalIva} `)
-        } else {
-            alert(`${nombreUser} llevara \n ${listaFinal} \n Total final: $${sumaTotal} `)
-        }
+function finaliza() {
+  if (sumaTotal !== 0) {
+    const carritoMostrado = carrito.map(function (articulo) {
+      return articulo.nombre;
+    });
+    const carritoString = carritoMostrado.join(" - \n -  ");
+    alert(`Usted llevara ${carritoMostrado}`);
+    let factura = prompt("Necesita factura? Escriba SI o NO").toLowerCase();
+    const fecha = new Date();
+    if (factura == "si" || factura == "sí") {
+      let nombreUser = prompt("Ingresa tu nombre");
+      if (nombreUser !== "") {
+        alert(
+          `${fecha.toLocaleString()}  \n ${nombreUser}: \n ${carritoString} \n Total final: $ ${
+            sumaTotal * 1.21
+          }`
+        );
+      } else {
+        alert("Escriba un nombre");
+        nombreUser = prompt("Ingresa tu nombre");
+      }
     } else {
-        alert("No haz agregado nada a tu compra")
+      alert(
+        `${fecha.toLocaleString()} \n ${nombreUser}: \n ${carritoString} \n Total final: $${sumaTotal} `
+      );
     }
+  } else {
+    alert("No haz agregado nada a tu compra");
+  }
 }
 
-function sumaCompra(producto, valor, cantidad) {
-    stockValidado(cantidad)
-    if(stockValidado){
-        alert(`Sumamos ${producto} por la cantidad de ${cantidad} unidades`)
-        sumaTotal += valor * cantidad;
-        listaFinal += `${producto} \n`;
-    }else{
-        alert("NO")
-    }
-
+while (isNaN(eleccionUser)) {
+  alert("Ingresaste un valor no numerico, reintentalo");
+  eleccionUser = parseInt(
+    prompt(
+      `Indique el numero del articulo que desea comprar :\n ${listaTienda}`
+    )
+  );
 }
+while (eleccionUser !== 0) {
+  let unidades = parseInt(prompt(`Cuantas unidades desea?`));
+  const articulosElegidos = listaArticulos.find((e) => e.id == eleccionUser);
 
+  articulosElegidosStock.push(articulosElegidos);
+  articulosElegidosStock.forEach((element) => {
+    element.stock = element.stock - unidades;
+  });
 
-
-
-    while(itemUser != 0){
-    let unidades = parseInt(prompt(`Caunatas unidades de desea?`))
-    switch (itemUser) {
-        case 1:
-            sumaCompra(`${item1.nombre}`, `${item1.precio}`, unidades)
-            break;
-        case 2:
-            sumaCompra(`${item2.nombre}` , `${item2.precio}`, unidades)
-            break;
-        case 3:
-            sumaCompra(`${item3.nombre}`, `${item3.precio}`, unidades)
-            break;
-        default:
-            alert("Elige una opcion de la lista")
-    }
-    itemUser = parseInt(prompt(`Indique el numero del articulo que desea comprar :\n ${stockTienda} `))
-    }
-
-
-
-finaliza()
+  const validador = articulosElegidosStock.some((e) => e.stock >= unidades);
+  if (validador) {
+    alert(
+      `Sumamos ${articulosElegidos.nombre} por la cantidad de ${unidades} unidades`
+    );
+    carrito.push(articulosElegidos);
+    sumaTotal += articulosElegidos.precio * unidades;
+  } else {
+    alert(`No tenemos suficiente stock para tu pedido`);
+  }
+  eleccionUser = parseInt(
+    prompt(
+      `Indique el numero del articulo que desea comprar :\n ${listaTienda}`
+    )
+  );
+}
+finaliza();
