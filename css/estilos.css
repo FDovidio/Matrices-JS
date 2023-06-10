@@ -1,0 +1,52 @@
+body{
+    font-family: 'Quicksand', sans-serif;
+}
+
+.navBar{
+    background-color: rgba(42, 81, 68, 0.795);
+}
+#matePNGNavbar{
+    height: 2rem;
+    padding-bottom: 5px;
+}
+#banner{
+    background-color: rgb(201, 214, 212);
+}
+#cardImagen{
+    width: 10rem;
+    height: 15rem;
+}
+
+#cardProducto{
+    background-color: rgba(108, 129, 109, 0.16);
+}
+
+.botonComprar{
+    background-color: rgba(42, 81, 68, 0.795);
+    width:100%;
+}
+
+#cardBodyModal{
+    height: 15rem;
+}
+#imagenProductoModal{
+    height: 10rem;
+    width: 8rem;
+}
+.precioTarjetaModal{
+   padding-top: 43%;
+   padding-left: 30%;
+}
+#datosTarjetaHeader{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 20px;
+    background-color: rgba(95, 151, 108, 0.26);
+}
+
+.formPago>input{
+    padding: 2px;
+}
+.formPago>label{
+    padding: 2px;
+}
