@@ -147,6 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
   productosEnCarrito(carrito);
 });
 
+
 function pagoHTML(botonFinalizarCompra, total) {
   const containerProductos = document.querySelector("#containerProductos");
   botonFinalizarCompra.addEventListener("click", () => {
