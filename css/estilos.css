@@ -1,7 +1,10 @@
 body{
     font-family: 'Quicksand', sans-serif;
 }
-
+#marcaNavbar{
+    background-color: transparent;
+    border: none;
+}
 .navBar{
     background-color: rgba(42, 81, 68, 0.795);
 }
@@ -37,16 +40,26 @@ body{
    padding-top: 43%;
    padding-left: 30%;
 }
+
+.botonEliminar{
+    padding-right: 3%;
+    display: flex;  
+    justify-content: end;
+}
 #datosTarjetaHeader{
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 20px;
     background-color: rgba(95, 151, 108, 0.26);
 }
-
+#divFormTarjeta{
+    
+}
 .formPago>input{
     padding: 2px;
 }
 .formPago>label{
     padding: 2px;
 }
+
+

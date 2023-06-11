@@ -2,66 +2,70 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>Document</title>   
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Tilt+Prism&display=swap" rel="stylesheet">  
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Tilt+Prism&display=swap" rel="stylesheet">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="./css/estilos.css">
+  <link rel="stylesheet" href="./css/estilos.css">
 
 </head>
 
 <body>
-    <div class="navBar">
+  <div class="navBar">
     <nav class="navbar navbar-light ">
-        <div class="container-fluid">
-          <a class="navbar-brand text-white" id="marcaNabvar">Matrices <img src="./multimedia/5346913.png" alt="" id="matePNGNavbar"></a>
-          <form class="d-flex" role="search">
-            <button class="btn btn-outline-light" type="button" id="verCarrito" data-bs-toggle="modal" data-bs-target="#ventanaModal">🛒Carrito</button>
-          </form>
-        </div>
-      </nav>
-    </div>
-    
-    <!--Productos y banner -->
-    <main>
+      <div class="container-fluid" id="containerMarcaNavbar">
+        <button class="navbar-brand text-white" id="marcaNavbar" onclick="location.reload()">Matrices <img
+            src="./multimedia/5346913.png" alt="" id="matePNGNavbar"></button>
+        <form class="d-flex" role="search">
+          <button class="btn btn-outline-light" type="button" id="verCarrito" data-bs-toggle="modal"
+            data-bs-target="#ventanaModal">🛒Carrito</button>
+        </form>
+      </div>
+    </nav>
+  </div>
+
+  <!--Productos y banner -->
+  <main>
     <div class="container-fluid " id="containerProductos">
       <div class="row" id="listaProductos">
-      <div class="px-4 py-5 my-3 text-center" id="banner">
-        <img class="d-block mx-auto mb-4" src="./multimedia/5346913.png" alt="" width="72" >
-        <h1 class="display-5 fw-bold" id="marcaNabvar">Matrices</h1>
-        <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">
-        El primer e-commerce con el mejor catalogo de productos que llevara tu experiencia de mate al siguiente nivel         </p>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-        <a href="#contentTarjetas"><button type="button" class="btn btn-light btn-lg px-4 gap-3">Comenzar</button></a>
+        <div class="px-4 py-5 my-3 text-center" id="banner">
+          <img class="d-block mx-auto mb-4" src="./multimedia/5346913.png" alt="" width="72">
+          <h1 class="display-5 fw-bold" id="marcaNabvar">Matrices</h1>
+          <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+              El primer e-commerce con el mejor catalogo de productos que llevara tu experiencia de mate al siguiente
+              nivel </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <a href="#contentTarjetas"><button type="button"
+                  class="btn btn-light btn-lg px-4 gap-3">Comenzar</button></a>
+            </div>
+          </div>
         </div>
-        </div>
-        </div>
-      
-  </div>
+
+      </div>
     </div>
   </main>
-    
-    <!--Modal Carrito de compras-->
-    <div class="modal fade" id="ventanaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content"id="carritoModal">
-  </div>
-</div>
-</div>
 
-    
-    <script src="./js/main.js">  </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+  <!--Modal Carrito de compras-->
+  <div class="modal fade" id="ventanaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content" id="carritoModal">
+      </div>
+    </div>
+  </div>
+
+
+  <script src="./js/main.js">  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
 
 </body>
 
