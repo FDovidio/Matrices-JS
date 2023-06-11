@@ -274,8 +274,6 @@ function resumenDeCompra(comprarAForm, containerProductos, total) {
     <h3 class="d-flex justify-content-end">Total(+IVA): $${total * 1.21}</h3>
     </div> `;
 
-    factura.checked
-      ? compraExitosa.append(totalCompraConF)
-      : compraExitosa.append(totalCompraSinF);
+    factura.checked? compraExitosa.append(totalCompraConF): compraExitosa.append(totalCompraSinF);
   });
 }
