@@ -1,26 +1,44 @@
-let myModal = document.getElementById('myModal')
-let myInput = document.getElementById('myInput')
-
+let myModal = document.getElementById("myModal");
+let myInput = document.getElementById("myInput");
 
 const listaArticulos = [
-    { nombre: "Yerba", id: 1, precio: 1000, stock: 200, img: "https://ipparaguay.com.py/wp-content/uploads/2020/11/Yerba-Mate-Beneficios-Historia-y-Recomendaciones.jpg", cantidad: 1 },
-    { nombre: "Termo", id: 2, precio: 10000, stock: 70, img: "https://m.media-amazon.com/images/I/31pf253c7VL._AC_.jpg", cantidad: 1 },
-    { nombre: "Mate", id: 3, precio: 5000, stock: 150, img: "https://d22fxaf9t8d39k.cloudfront.net/ba1e77d8d438601b898ab1f8395f70d19a15ddbe5b9c202d0eaa4e1b893dd4f619762.jpeg", cantidad: 1 },
+  {
+    nombre: "Yerba",
+    id: 1,
+    precio: 1000,
+    stock: 200,
+    img: "https://ipparaguay.com.py/wp-content/uploads/2020/11/Yerba-Mate-Beneficios-Historia-y-Recomendaciones.jpg",
+    cantidad: 1,
+  },
+  {
+    nombre: "Termo",
+    id: 2,
+    precio: 10000,
+    stock: 70,
+    img: "https://m.media-amazon.com/images/I/31pf253c7VL._AC_.jpg",
+    cantidad: 1,
+  },
+  {
+    nombre: "Mate",
+    id: 3,
+    precio: 5000,
+    stock: 150,
+    img: "https://d22fxaf9t8d39k.cloudfront.net/ba1e77d8d438601b898ab1f8395f70d19a15ddbe5b9c202d0eaa4e1b893dd4f619762.jpeg",
+    cantidad: 1,
+  },
 ];
-
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 let sumaTotal = 0;
 
-
 function renderProductos(listaArticulos) {
-    const listaProductos = document.getElementById("listaProductos")
-    listaArticulos.forEach((product) => {
-        let content = document.createElement("div")
-        content.className = "col-sm-4 "
-        content.setAttribute("id", "contentTarjetas");
-        content.innerHTML = `
+  const listaProductos = document.getElementById("listaProductos");
+  listaArticulos.forEach((product) => {
+    let content = document.createElement("div");
+    content.className = "col-sm-4 ";
+    content.setAttribute("id", "contentTarjetas");
+    content.innerHTML = `
       <div class="card text-center border border-2" id="cardProducto">
         <div class="card-body " id="cardBody">
         <img src="${product.img}" class="card-img-top " alt="..." id="cardImagen">
@@ -31,50 +49,47 @@ function renderProductos(listaArticulos) {
     </div>
     `;
 
-        listaProductos.append(content)
+    listaProductos.append(content);
 
-        let comprar = document.createElement("button");
-        comprar.innerText = "Comprar"
-        comprar.className = "botonComprar btn text-white"
-        content.append(comprar)
+    let comprar = document.createElement("button");
+    comprar.innerText = "Comprar";
+    comprar.className = "botonComprar btn text-white";
+    content.append(comprar);
 
-        comprar.addEventListener("click", () => {
-            carrito.push({
-                id: product.id,
-                img: product.img,
-                nombre: product.nombre,
-                precio: product.precio,
-            });
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-        });
-
+    comprar.addEventListener("click", () => {
+      carrito.push({
+        id: product.id,
+        img: product.img,
+        nombre: product.nombre,
+        precio: product.precio,
+      });
+      localStorage.setItem("carrito", JSON.stringify(carrito));
     });
-};
+  });
+}
 renderProductos(listaArticulos);
 
-
 function productosEnCarrito(destino) {
-    const verCarrito = document.getElementById("verCarrito")
-    const carritoModal = document.getElementById("carritoModal")
-    verCarrito.addEventListener("click", () => {
-        carritoModal.innerHTML = "";
-        let carritoHeader = document.createElement("div")
-        carritoHeader.className = "modal-header"
-        carritoHeader.innerHTML = ` <h1 class="carritoHeaderTitulo"> Carrito de Compras</h1>
+  const verCarrito = document.getElementById("verCarrito");
+  const carritoModal = document.getElementById("carritoModal");
+  verCarrito.addEventListener("click", () => {
+    carritoModal.innerHTML = "";
+    let carritoHeader = document.createElement("div");
+    carritoHeader.className = "modal-header";
+    carritoHeader.innerHTML = ` <h1 class="carritoHeaderTitulo"> Carrito de Compras</h1>
     `;
-        carritoModal.append(carritoHeader);
+    carritoModal.append(carritoHeader);
 
-        const modalButton = document.createElement("div")
-        modalButton.className = "botonCerrar"
-        modalButton.innerHTML = `
+    const modalButton = document.createElement("div");
+    modalButton.className = "botonCerrar";
+    modalButton.innerHTML = `
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        `
-        carritoHeader.append(modalButton);
+        `;
+    carritoHeader.append(modalButton);
 
-
-        destino.forEach((product) => {
-            let carritoContent = document.createElement("div")
-            carritoContent.innerHTML = ` 
+    destino.forEach((product) => {
+      let carritoContent = document.createElement("div");
+      carritoContent.innerHTML = ` 
     <div class="modal-body col-sm">
     <div class="card text-center border border-2 " id="cardProducto">
     <div class="card-body d-flex" id="cardBodyModal">
@@ -85,65 +100,59 @@ function productosEnCarrito(destino) {
   </div>
   </div>
 </div>
-    `
-            const botonEliminar = document.createElement("div")
-            botonEliminar.className = "botonEliminar "
-            botonEliminar.innerHTML = `
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar</button>`
-            carritoContent.append(botonEliminar)
-            botonEliminar.addEventListener("click", () => {
-                eliminarDelCarrito(product)
-            })
+    `;
+      const botonEliminar = document.createElement("div");
+      botonEliminar.className = "botonEliminar ";
+      botonEliminar.innerHTML = `
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar</button>`;
+      carritoContent.append(botonEliminar);
+      botonEliminar.addEventListener("click", () => {
+        eliminarDelCarrito(product);
+      });
 
-            carritoModal.append(carritoContent);
+      carritoModal.append(carritoContent);
+    });
 
-        });
+    const eliminarDelCarrito = (producto) => {
+      if (producto.cantidad > 1) {
+        producto.cantidad--;
+      } else {
+        const index = carrito.indexOf(producto);
+        carrito.splice(index, 1);
+      }
 
-        const eliminarDelCarrito = (producto) => {
-            if (producto.cantidad > 1) {
-                producto.cantidad--
-            } else {
-                const index = carrito.indexOf(producto)
-                carrito.splice(index, 1)
-            }
+      productosEnCarrito(carrito);
+    };
+    const total = carrito.reduce((total, prod) => total + prod.precio, 0);
 
-            productosEnCarrito(carrito)
-        }
-        const total = carrito.reduce((total, prod) => total + prod.precio, 0);
-
-        const totalCompra = document.createElement("div")
-        totalCompra.className = "modal-footer"
-        totalCompra.innerHTML = `
+    const totalCompra = document.createElement("div");
+    totalCompra.className = "modal-footer";
+    totalCompra.innerHTML = `
     <h3>Total: $ ${total}</h3>
-    `
-        let comprarFin = document.createElement("div");
-        comprarFin.className = "botonComprarFinaliza "
-        comprarFin.innerHTML = `    
+    `;
+    let comprarFin = document.createElement("div");
+    comprarFin.className = "botonComprarFinaliza ";
+    comprarFin.innerHTML = `    
     <button type="button" class="btn btn-success" data-bs-dismiss="modal"  >Finalizar compra</button>
-    `
-        totalCompra.append(comprarFin)
+    `;
+    totalCompra.append(comprarFin);
 
-        carritoModal.append(totalCompra)
+    carritoModal.append(totalCompra);
 
-
-
-        pagoHTML(comprarFin, total)
-    })
+    pagoHTML(comprarFin, total);
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    productosEnCarrito(carrito)
+  productosEnCarrito(carrito);
 });
 
-
 function pagoHTML(botonFinalizarCompra, total) {
-
-    const containerProductos = document.querySelector("#containerProductos")
-    botonFinalizarCompra.addEventListener("click", () => {
-
-        let finalizarCompraContent = document.querySelector("#listaProductos")
-        finalizarCompraContent.className = "finalizarContent"
-        finalizarCompraContent.innerHTML = `
+  const containerProductos = document.querySelector("#containerProductos");
+  botonFinalizarCompra.addEventListener("click", () => {
+    let finalizarCompraContent = document.querySelector("#listaProductos");
+    finalizarCompraContent.className = "finalizarContent";
+    finalizarCompraContent.innerHTML = `
 <h2 class= "text-center" id="datosTarjetaHeader">Finaliza tu compra</h2>
 <h3>Datos de tarjeta de credito</h3> 
 <form class="row g-3 ps-1">
@@ -172,46 +181,44 @@ function pagoHTML(botonFinalizarCompra, total) {
   </div>
 </form>
 
-`
-        const checkFactura = document.createElement("div")
-        checkFactura.className = "form-check"
-        checkFactura.innerHTML = `
+`;
+    const checkFactura = document.createElement("div");
+    checkFactura.className = "form-check";
+    checkFactura.innerHTML = `
 
 <input class="form-check-input" type="checkbox" value="" name="checkboxFactura" id="checkboxFactura" >
 <label class="form-check-label" for="checkboxFactura">
   Necesito Factura
 </label>
 
-`
-        finalizarCompraContent.append(checkFactura)
+`;
+    finalizarCompraContent.append(checkFactura);
 
+    const comprarAForm = document.createElement("div");
+    comprarAForm.className = "comprarAForm";
+    comprarAForm.innerHTML = `
+    <button type="button" class="btn btn-success pt-2" type="submit">Comprar</button>`;
+    finalizarCompraContent.append(comprarAForm);
 
-        const comprarAForm = document.createElement("div")
-        comprarAForm.className = "comprarAForm"
-        comprarAForm.innerHTML = `
-    <button type="button" class="btn btn-success pt-2" type="submit">Comprar</button>`
-        finalizarCompraContent.append(comprarAForm)
+    const volverAGondola = document.createElement("div");
+    volverAGondola.className = "volverAGondola pt-2";
+    volverAGondola.innerHTML = `
+        <button type="button" class="btn btn-secondary pt-2 " onclick="location.reload()">Volver</button>`;
+    finalizarCompraContent.append(volverAGondola);
 
-        const volverAGondola = document.createElement("div")
-        volverAGondola.className = "volverAGondola pt-2"
-        volverAGondola.innerHTML = `
-        <button type="button" class="btn btn-secondary pt-2 " onclick="location.reload()">Volver</button>`
-        finalizarCompraContent.append(volverAGondola)
+    containerProductos.append(finalizarCompraContent);
 
-        containerProductos.append(finalizarCompraContent)
-
-        resumenDeCompra(comprarAForm, containerProductos, total)
-    })
+    resumenDeCompra(comprarAForm, containerProductos, total);
+  });
 }
 
-
 function resumenDeCompra(comprarAForm, containerProductos, total) {
-    comprarAForm.addEventListener("click", () => {
-        const factura = document.getElementById("checkboxFactura")
-        localStorage.clear();
-        const compraExitosa = document.querySelector("#listaProductos")
-        compraExitosa.className = "compraExitosa border border-2 rounded-1 m-2"
-        compraExitosa.innerHTML = `
+  comprarAForm.addEventListener("click", () => {
+    const factura = document.getElementById("checkboxFactura");
+    localStorage.clear();
+    const compraExitosa = document.querySelector("#listaProductos");
+    compraExitosa.className = "compraExitosa border border-2 rounded-1 m-2";
+    compraExitosa.innerHTML = `
     <div class="px-4 py-5 my-5 text-center">
     <img src="./multimedia/5346913.png" class="imagenBannerFelicitaciones" alt="" width="65" height="57">
     <h1 class="display-5 fw-bold">Felicitaciones</h1>
@@ -234,12 +241,12 @@ function resumenDeCompra(comprarAForm, containerProductos, total) {
     <h2>Valor</h2>
     </div>
     </div>
-    `
-        containerProductos.append(compraExitosa)
+    `;
+    containerProductos.append(compraExitosa);
 
-        carrito.forEach((product) => {
-            const compraFinal = document.createElement("div")
-            compraFinal.innerHTML = `
+    carrito.forEach((product) => {
+      const compraFinal = document.createElement("div");
+      compraFinal.innerHTML = `
         <div class="row" id="resumenCompra">
         <div class="col-sm">
         <h3>${product.nombre}</h3>
@@ -248,31 +255,26 @@ function resumenDeCompra(comprarAForm, containerProductos, total) {
         <h4>$${product.precio}</h4>
         </div>
         </div>
-        `
-            compraExitosa.append(compraFinal)
-        });
+        `;
+      compraExitosa.append(compraFinal);
+    });
 
-
-        const totalCompraSinF = document.createElement("div")
-        totalCompraSinF.innerHTML = `
+    const totalCompraSinF = document.createElement("div");
+    totalCompraSinF.innerHTML = `
     <div class="row">
     <h3 class="d-flex justify-content-end">Total: $${total}</h3>
-    </div> `
+    </div> `;
 
-
-        const fecha = new Date();
-        const totalCompraConF = document.createElement("div")
-        totalCompraConF.innerHTML = `
+    const fecha = new Date();
+    const totalCompraConF = document.createElement("div");
+    totalCompraConF.innerHTML = `
     <div class="row">
     <h3 class="d-flex justify-content-end">${fecha.toLocaleString()}</h3>
     <h3 class="d-flex justify-content-end">Total(+IVA): $${total * 1.21}</h3>
-    </div> `
+    </div> `;
 
-
-        factura.checked ? compraExitosa.append(totalCompraConF) : compraExitosa.append(totalCompraSinF)
-
-    })
+    factura.checked
+      ? compraExitosa.append(totalCompraConF)
+      : compraExitosa.append(totalCompraSinF);
+  });
 }
-
-
-
