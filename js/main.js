@@ -1,16 +1,7 @@
 
-
-
-
 let myModal = document.getElementById('myModal')
 let myInput = document.getElementById('myInput')
 
-
-const listaArticulos = [
-    { nombre: "Yerba", id: 1, precio: 1000, stock: 200, img:"https://ipparaguay.com.py/wp-content/uploads/2020/11/Yerba-Mate-Beneficios-Historia-y-Recomendaciones.jpg", cantidad:1 },
-    { nombre: "Termo", id: 2, precio: 10000, stock: 70, img: "https://m.media-amazon.com/images/I/31pf253c7VL._AC_.jpg", cantidad:1 },
-    { nombre: "Mate", id: 3, precio: 5000, stock: 150, img:"https://d22fxaf9t8d39k.cloudfront.net/ba1e77d8d438601b898ab1f8395f70d19a15ddbe5b9c202d0eaa4e1b893dd4f619762.jpeg", cantidad:1 },
-];
 
 
 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -22,27 +13,36 @@ function renderProductos(listaArticulos){
     const listaProductos = document.getElementById("listaProductos")
 listaArticulos.forEach((product) =>{
     let content = document.createElement("div")
-    content.className = "col-sm-4 "
+    content.className = "col-sm-4"
     content.setAttribute("id", "contentTarjetas");
     content.innerHTML = `
-      <div class="card text-center border border-2" id="cardProducto">
-        <div class="card-body " id="cardBody">
-        <img src="${product.img}" class="card-img-top " alt="..." id="cardImagen">
-        <h3 class="card-title pt-2">${product.nombre}</h3>
-        <h4 class="card-title">$${product.precio}</h4>
+      <div class="card mb-3 text-center" id="cardProducto">
+        <div class="card-body  " id="cardBody">
+        <img src="${product.img}" class="card-img-top img-fluid" alt="..." id="cardImagen">
+        <h3 class="card-title pt-2" id="textoTarjetaNombre">${product.nombre}</h3>
+        <h4 class="card-title" id="textoTarjetaPrecio">$${product.precio}</h4>
         </div>
       </div>
     </div>
-    `;
+    `
     
     listaProductos.append(content)
 
     let comprar = document.createElement("button");
     comprar.innerText = "Comprar"
-    comprar.className = "botonComprar btn text-white"
+    comprar.className = "botonComprar btn btn-outline-dark mt-2 "
     content.append(comprar)
     
     comprar.addEventListener("click", () =>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `Agregaste ${product.nombre}`,
+        showConfirmButton: false,
+        timer: 1500,
+        width: 230,
+        height: 150
+      })
     carrito.push({
         id : product.id,
         img: product.img,
@@ -54,16 +54,19 @@ listaArticulos.forEach((product) =>{
     
 });
 };
-renderProductos(listaArticulos);
+
+
 
 
 function productosEnCarrito (destino){
 const verCarrito = document.getElementById("verCarrito")
 const carritoModal = document.getElementById("carritoModal")
+
 verCarrito.addEventListener("click",() => {
+  const total = carrito.reduce((total, prod) => total + prod.precio, 0);
     carritoModal.innerHTML = "";
     let carritoHeader = document.createElement("div")
-    carritoHeader.className = "modal-header"
+    carritoHeader.className = "modal-header bg-white m-2"
     carritoHeader.innerHTML = ` <h1 class="carritoHeaderTitulo"> Carrito de Compras</h1>
     `;
     carritoModal.append(carritoHeader);
@@ -79,12 +82,12 @@ verCarrito.addEventListener("click",() => {
     destino.forEach((product) => {
     let carritoContent = document.createElement("div")
     carritoContent.innerHTML = ` 
-    <div class="modal-body col-sm">
-    <div class="card text-center border border-2 " id="cardProducto">
-    <div class="card-body d-flex" id="cardBodyModal">
+    <div class="modal-body col-sm ">
+    <div class="card text-center" id="cardProducto">
+    <div class="card-body d-flex " id="cardBodyModal">
     <img src="${product.img}" class="card-img-top " alt="..." id="imagenProductoModal">
-    <h3 class="card-title p-3 pt-5">${product.nombre}</h3>
-    <h4 class="precioTarjetaModal card-title"  >$${product.precio}</h4>
+    <h3 class="card-title p-3 pt-5 ">${product.nombre}</h3>
+    <h4 class="precioTarjetaModal card-title "  >$${product.precio}</h4>
     </div>
   </div>
   </div>
@@ -93,14 +96,23 @@ verCarrito.addEventListener("click",() => {
     const botonEliminar = document.createElement("div")
     botonEliminar.className = "botonEliminar "
     botonEliminar.innerHTML= `
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Eliminar</button>`
+    <button type="button" class="btn btn-secondary mt-0" data-bs-dismiss="modal">Eliminar</button>`
     carritoContent.append(botonEliminar)
     botonEliminar.addEventListener("click", ()=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: `Eliminaste ${product.nombre}`,
+        showConfirmButton: false,
+        timer: 1500,
+        width: 230,
+        height: 150
+      })
         eliminarDelCarrito(product)
+        localStorage.setItem("carrito", JSON.stringify(carrito));
     })
 
     carritoModal.append(carritoContent);
-    
 });
 
 const eliminarDelCarrito = (producto) =>{
@@ -113,32 +125,34 @@ const eliminarDelCarrito = (producto) =>{
 
     productosEnCarrito(carrito)
 }
-const total = carrito.reduce((total, prod) => total + prod.precio, 0);
 
     
     const totalCompra = document.createElement("div")
-    totalCompra.className = "modal-footer"
+    totalCompra.className = "modal-footer m-2 bg-white"
     totalCompra.innerHTML = `
     <h3>Total: $ ${total}</h3>
     `
+    
     let comprarFin = document.createElement("div");
     comprarFin.className = "botonComprarFinaliza " 
     comprarFin.innerHTML = `    
-    <button type="button" class="btn btn-success" data-bs-dismiss="modal"  >Finalizar compra</button>
+    <button type="button" class="btn btn-outline-dark" data-bs-dismiss="modal" id="botonComprarFinaliza" >Finalizar compra</button>
     `
     totalCompra.append(comprarFin)
+    
 
     carritoModal.append(totalCompra)
     
     
 
     pagoHTML(comprarFin, total)
-})     
+})
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+
+
 productosEnCarrito (carrito)
-});
+
 
 
     function pagoHTML(botonFinalizarCompra, total) {
@@ -149,16 +163,17 @@ botonFinalizarCompra.addEventListener("click",() =>{
 let finalizarCompraContent = document.querySelector("#listaProductos")
 finalizarCompraContent.className = "finalizarContent"
 finalizarCompraContent.innerHTML = `
-<h2 class= "text-center" id="datosTarjetaHeader">Finaliza tu compra</h2>
-<h3>Datos de tarjeta de credito</h3> 
-<form class="row g-3 ps-1">
+<h2 class= "text-center  " id="datosTarjetaHeader">Finaliza tu compra</h2>
+<div class="formPagoContent p-3">
+<h3 class="m-2">Datos de tarjeta </h3> 
+<form class="row g-3 ps-1"  onsubmit="resumenDeCompra('${total}')">
 <div class="col-md-8">
     <label for="validationDefault05" class="form-label">Numero de tarjeta</label>
     <input type="text" class="form-control" id="validationDefault05" required>
   </div>
 <div class="col-md-8" id="divFormTarjeta" >
   <label for="validationDefault01" class="form-label" id="nombreComprador">Nombre (Como figura en la tarjeta)</label>
-  <input type="text" class="form-control" id="validationDefault01"  required>
+  <input type="text" class="form-control" id="validationDefault05Nombre"  required>
 </div>
 <div class="col-md-5">
   <label for="validationDefault05" class="form-label">Fecha de expiracion</label>
@@ -175,67 +190,68 @@ finalizarCompraContent.innerHTML = `
       <input type="text" class="form-control" id="validationDefaultUsername"  aria-describedby="inputGroupPrepend2" required>
     </div>
   </div>
-</form>
-
-`
-const checkFactura = document.createElement("div")
-checkFactura.className = "form-check"
-checkFactura.innerHTML = `
-
-<input class="form-check-input" type="checkbox" value="" name="checkboxFactura" id="checkboxFactura" >
-<label class="form-check-label" for="checkboxFactura">
+  <div class="col-md-8" od="form-check" >
+  <input class="form-check-input" type="checkbox" value="" name="checkboxFactura"  id="checkboxFactura">
+<label class="form-check-label" for="checkboxFactura" >
   Necesito Factura
 </label>
-
+  </div>
+  <div class="col-12 d-flex justify-content-end"  >
+  <p class="totalForm fs-2 mt-2">Total: $${total}</p>
+</div>
+  <div class="col-12"  >
+  <button class="btn btn-outline-dark" id="botonFinalizarResumen" type="submit" >Comprar</button>
+</div>
+<div class="col-12"  >
+<button type="button" class="btn btn-secondary pt-1 " onclick="location.reload()">Volver</button>
+</div>
+</form>
+</div>
 `
-finalizarCompraContent.append(checkFactura)
 
+})
 
-const comprarAForm = document.createElement("div")
-comprarAForm.className = "comprarAForm"
-comprarAForm.innerHTML = `
-    <button type="button" class="btn btn-success pt-2" type="submit">Comprar</button>`
-    finalizarCompraContent.append(comprarAForm)
-
-    const volverAGondola = document.createElement("div")
-    volverAGondola.className = "volverAGondola pt-2"
-    volverAGondola.innerHTML = `
-        <button type="button" class="btn btn-secondary pt-2 " onclick="location.reload()">Volver</button>`
-        finalizarCompraContent.append(volverAGondola)
-
-containerProductos.append(finalizarCompraContent)
-
-resumenDeCompra (comprarAForm, containerProductos, total)
-})    
 }
 
 
-function resumenDeCompra (comprarAForm, containerProductos, total){
-comprarAForm.addEventListener("click", () => {
+
+
+
+function resumenDeCompra (total){
+localStorage.clear();
+  const comprarAForm = document.querySelector("#botonFinalizarResumen")
+  const containerProductos = document.querySelector("#containerProductos")
+
+  Swal.fire({
+    title: 'Felicitaciones',
+    text:'Su compra se ha realizado con exito',
+    showConfirmButton: false,
+    timer: 2000,
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    }
+  })
+
     const factura = document.getElementById("checkboxFactura")
-    localStorage.clear();
+    const nombreComprador = document.getElementById("validationDefault05Nombre")
     const compraExitosa = document.querySelector("#listaProductos")
     compraExitosa.className = "compraExitosa border border-2 rounded-1 m-2"
     compraExitosa.innerHTML = `
     <div class="px-4 py-5 my-5 text-center">
     <img src="./multimedia/5346913.png" class="imagenBannerFelicitaciones" alt="" width="65" height="57">
-    <h1 class="display-5 fw-bold">Felicitaciones</h1>
-    <div class="col-lg-6 mx-auto">
-    <p class="lead mb-4">
-    Tu compra ha sido procesada copn exito. Gracias por confiar en nosotros.
-    </p>
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-    <button type="button" class="btn btn-success btn-lg px-4 gap-3" onclick="location.reload()">Volver al inicio</button>
-    </div>
-    </div>
+    <h1 class="display-5 fw-bold">Matrices</h1>
     </div>
     <div class="row" id="datosFactura">
+    <h2 ps-2>Nombre: ${nombreComprador.value}</h2>
     </div>
-    <div class="row">
+    <div class="row ">
     <div class="col-sm">
     <h2>Articulo</h2>
     </div>
-    <div class="col-sm">
+    <div class="col-sm ">
     <h2>Valor</h2>
     </div>
     </div>
@@ -247,9 +263,9 @@ comprarAForm.addEventListener("click", () => {
         compraFinal.innerHTML = `
         <div class="row" id="resumenCompra">
         <div class="col-sm">
-        <h3>${product.nombre}</h3>
+        <h3 class=" m-2">${product.nombre}</h3>
         </div>
-        <div class="col-sm">
+        <div class="col-sm m-2">
         <h4>$${product.precio}</h4>
         </div>
         </div>
@@ -261,7 +277,7 @@ comprarAForm.addEventListener("click", () => {
     const totalCompraSinF = document.createElement("div")
     totalCompraSinF.innerHTML = `
     <div class="row">
-    <h3 class="d-flex justify-content-end">Total: $${total}</h3>
+    <h3 class="d-flex justify-content-end ">Total: $${total}</h3>
     </div> `
     
     
@@ -269,15 +285,27 @@ comprarAForm.addEventListener("click", () => {
     const totalCompraConF = document.createElement("div")
     totalCompraConF.innerHTML = `
     <div class="row">
-    <h3 class="d-flex justify-content-end">${fecha.toLocaleString()}</h3>
-    <h3 class="d-flex justify-content-end">Total(+IVA): $${total * 1.21}</h3>
+    <h3 class="d-flex justify-content-end ">${fecha.toLocaleString()}</h3>
+    <h3 class="d-flex justify-content-end ">Total(+IVA): $${total * 1.21}</h3>
     </div> `
     
     
     factura.checked? compraExitosa.append(totalCompraConF) : compraExitosa.append(totalCompraSinF)
 
-})
-}   
 
+  }
+
+
+
+
+document.addEventListener("DOMContentLoaded", ()=>{
+  fetch('../catalogo.json')
+  .then((res) => res.json())
+  .then((data) => {
+  renderProductos(data)
+
+})
+
+})
 
 

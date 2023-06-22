@@ -1,39 +1,72 @@
+html {
+    min-height: 100%;
+    position: relative;
+  }
+
 body{
+    margin: 0;
+    margin-bottom: 150px;
     font-family: 'Quicksand', sans-serif;
+    background-image: url(../multimedia/burlap-sack-texture-free-photo.JPG) ;
 }
 #marcaNavbar{
     background-color: transparent;
     border: none;
 }
 .navBar{
-    background-color: rgba(42, 81, 68, 0.795);
+    background-color: #9fac82;
 }
 #matePNGNavbar{
     height: 2rem;
     padding-bottom: 5px;
 }
 #banner{
-    background-color: rgb(201, 214, 212);
+    background-color: rgba(255,250,236,255);
+    opacity: 90%;
 }
 #cardImagen{
-    width: 10rem;
-    height: 15rem;
+    max-width: 100%;
+    height: 70%;
+    display: flex;
+
 }
 
 #cardProducto{
-    background-color: rgba(108, 129, 109, 0.16);
+    background-color:rgba(249, 246, 236, 0.927);
+    border: none;
+    border-radius: 1rem;
+    height: 80%;
+    max-width: 100%;
 }
-
+#textoTarjetaNombre{
+    display: flex;
+    justify-content: end;
+    
+}
+#textoTarjetaPrecio{
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
 .botonComprar{
-    background-color: rgba(42, 81, 68, 0.795);
+    background-color:rgba(249, 246, 236, 0.84);
     width:100%;
-}
+    border-radius: 1rem;
 
+}
+.modal-content{
+    background-image: url(../multimedia/burlap-sack-texture-free-photo.JPG);
+    background-color:rgba(255,250,236,255);
+       margin: 2rem;
+ }
 #cardBodyModal{
     height: 15rem;
+    border: 2px solid;
+    border-radius: 1rem;
+
 }
 #imagenProductoModal{
-    height: 10rem;
+    height: 12rem;
     width: 8rem;
 }
 .precioTarjetaModal{
@@ -47,19 +80,40 @@ body{
     justify-content: end;
 }
 #datosTarjetaHeader{
+    background-color: #fffaec;
+    opacity: 97%;
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 20px;
-    background-color: rgba(95, 151, 108, 0.26);
+
 }
-#divFormTarjeta{
-    
-}
+
 .formPago>input{
-    padding: 2px;
+    padding: 2px;   
+    
 }
 .formPago>label{
     padding: 2px;
+
+}
+.formPagoContent{
+    background-color: #fffaec;
+    opacity: 97%;
+}
+
+.compraExitosa{
+    background-color: #fffaec;
+    opacity: 97%;
 }
 
 
+.Toastify__toast-container{
+    border-radius: 1rem;
+}
+
+footer{
+    background-color: #9fac82;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

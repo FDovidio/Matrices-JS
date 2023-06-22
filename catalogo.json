@@ -1,0 +1,50 @@
+[
+    {
+        "nombre": "Yerba",
+        "id": 1,
+        "precio": 1000,
+        "stock": 200,
+        "img": "https://ipparaguay.com.py/wp-content/uploads/2020/11/Yerba-Mate-Beneficios-Historia-y-Recomendaciones.jpg",
+        "cantidad": 1
+    },
+    {
+        "nombre": "Termo",
+        "id": 2,
+        "precio": 10000,
+        "stock": 70,
+        "img": "https://jumboargentina.vtexassets.com/arquivos/ids/601117-800-auto?v=637351320190670000&width=800&height=auto&aspect=true",
+        "cantidad": 1
+    },
+    {
+        "nombre": "Mate",
+        "id": 3,
+        "precio": 5000,
+        "stock": 150,
+        "img": "https://www.laselva.com.uy/repo/img/2_51.jpg",
+        "cantidad": 1
+    },
+    {
+        "nombre": "Bombilla",
+        "id": 3,
+        "precio": 1000,
+        "stock": 150,
+        "img": "https://cdn.shopify.com/s/files/1/0351/3673/3229/products/D_NQ_NP_898479-MLA45731292464_042021-O_1024x1024.jpg?v=1627424612",
+        "cantidad": 1
+    },
+    {
+        "nombre": "Pico de termo",
+        "id": 3,
+        "precio": 2000,
+        "stock": 150,
+        "img": "https://www.devotocamping.com.ar/cache_images/3/6/0/7/7/36077bc79e8b1afabb7f1746d53cc2d0512b2dc4--.jpg",
+        "cantidad": 1
+    },
+    {
+        "nombre": "Limpia bombilla",
+        "id": 3,
+        "precio": 500,
+        "stock": 150,
+        "img": "http://www.infocampo.com.ar/wp-content/uploads/2019/04/cepillo-limpia-bombilla.png",
+        "cantidad": 1
+    }
+]
