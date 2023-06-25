@@ -1,119 +1,112 @@
 html {
-    min-height: 100%;
-    position: relative;
-  }
-
-body{
-    margin: 0;
-    margin-bottom: 150px;
-    font-family: 'Quicksand', sans-serif;
-    background-image: url(../multimedia/burlap-sack-texture-free-photo.JPG) ;
-}
-#marcaNavbar{
-    background-color: transparent;
-    border: none;
-}
-.navBar{
-    background-color: #9fac82;
-}
-#matePNGNavbar{
-    height: 2rem;
-    padding-bottom: 5px;
-}
-#banner{
-    background-color: rgba(255,250,236,255);
-    opacity: 90%;
-}
-#cardImagen{
-    max-width: 100%;
-    height: 70%;
-    display: flex;
-
+  min-height: 100%;
+  position: relative;
 }
 
-#cardProducto{
-    background-color:rgba(249, 246, 236, 0.927);
-    border: none;
-    border-radius: 1rem;
-    height: 80%;
-    max-width: 100%;
+body {
+  margin: 0;
+  margin-bottom: 150px;
+  font-family: "Quicksand", sans-serif;
+  background-image: url(../multimedia/burlap-sack-texture-free-photo.JPG);
 }
-#textoTarjetaNombre{
-    display: flex;
-    justify-content: end;
-    
+#marcaNavbar {
+  background-color: transparent;
+  border: none;
 }
-#textoTarjetaPrecio{
-    display: flex;
-    justify-content: end;
-    align-items: end;
+.navBar {
+  background-color: #9fac82;
 }
-.botonComprar{
-    background-color:rgba(249, 246, 236, 0.84);
-    width:100%;
-    border-radius: 1rem;
-
-}
-.modal-content{
-    background-image: url(../multimedia/burlap-sack-texture-free-photo.JPG);
-    background-color:rgba(255,250,236,255);
-       margin: 2rem;
- }
-#cardBodyModal{
-    height: 15rem;
-    border: 2px solid;
-    border-radius: 1rem;
-
-}
-#imagenProductoModal{
-    height: 12rem;
-    width: 8rem;
-}
-.precioTarjetaModal{
-   padding-top: 43%;
-   padding-left: 30%;
+#matePNGNavbar {
+  height: 2rem;
+  padding-bottom: 5px;
 }
 
-.botonEliminar{
-    padding-right: 3%;
-    display: flex;  
-    justify-content: end;
+#banner {
+  background-color: rgba(255, 250, 236, 255);
+  opacity: 90%;
 }
-#datosTarjetaHeader{
-    background-color: #fffaec;
-    opacity: 97%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 20px;
-
+#cardImagen {
+  max-width: 100%;
+  height: 70%;
+  display: flex;
 }
 
-.formPago>input{
-    padding: 2px;   
-    
+#cardProducto {
+  background-color: rgba(249, 246, 236, 0.927);
+  border: none;
+  border-radius: 1rem;
+  height: 80%;
+  max-width: 100%;
 }
-.formPago>label{
-    padding: 2px;
-
+#textoTarjetaNombre {
+  display: flex;
+  justify-content: end;
 }
-.formPagoContent{
-    background-color: #fffaec;
-    opacity: 97%;
+#textoTarjetaPrecio {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+.botonComprar {
+  background-color: rgba(249, 246, 236, 0.84);
+  width: 100%;
+  border-radius: 1rem;
+}
+.modal-content {
+  background-image: url(../multimedia/burlap-sack-texture-free-photo.JPG);
+  background-color: rgba(255, 250, 236, 255);
+  margin: 2rem;
+}
+#cardBodyModal {
+  height: 15rem;
+  border: 2px solid;
+  border-radius: 1rem;
+}
+#imagenProductoModal {
+  height: 12rem;
+  width: 8rem;
+}
+.precioTarjetaModal {
+  padding-top: 43%;
+  padding-left: 10%;
 }
 
-.compraExitosa{
-    background-color: #fffaec;
-    opacity: 97%;
+.botonEliminar {
+  padding-right: 3%;
+  display: flex;
+  justify-content: end;
+}
+#datosTarjetaHeader {
+  background-color: #fffaec;
+  opacity: 97%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 20px;
 }
 
-
-.Toastify__toast-container{
-    border-radius: 1rem;
+.formPago > input {
+  padding: 2px;
+}
+.formPago > label {
+  padding: 2px;
+}
+.formPagoContent {
+  background-color: #fffaec;
+  opacity: 97%;
 }
 
-footer{
-    background-color: #9fac82;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.compraExitosa {
+  background-color: #fffaec;
+  opacity: 97%;
+}
+
+.Toastify__toast-container {
+  border-radius: 1rem;
+}
+
+footer {
+  background-color: #9fac82;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
