@@ -31,9 +31,12 @@ function renderProductos(listaArticulos) {
 
     comprar.addEventListener("click", () => {
       agregarAlCarrito(product);
+      controlStock(product);
+      contadorCarrito()
       localStorage.setItem("carrito", JSON.stringify(carrito));
     });
   });
+  contadorCarrito()
 }
 
 function agregarAlCarrito(product) {
@@ -51,6 +54,7 @@ function agregarAlCarrito(product) {
     carrito.map((prod) => {
       if (prod.id == product.id) {
         prod.cantidad++;
+        prod.stock --
       }
     });
   } else {
@@ -60,15 +64,26 @@ function agregarAlCarrito(product) {
       nombre: product.nombre,
       precio: product.precio,
       cantidad: product.cantidad,
+      stock: product.stock - 1,
     });
   }
 }
 
+function controlStock(product){
+  JSON.parse(localStorage.getItem("carrito")).find(e => {
+    if(e.id == product.id){
+      e.stock -- ;
+      localStorage.setItem("carrito", JSON.stringify(carrito))
+    }
+  });
+  
+}
+
 function contadorCarrito() {
   const badgeCarrito = document.getElementById("badgeCarrito");
-  badgeCarrito.innerText = carrito.length;
+  badgeCarrito.innerText = carrito.length ;
 }
-contadorCarrito();
+
 
 function productosEnCarrito(carrito) {
   const verCarrito = document.getElementById("verCarrito");
@@ -134,15 +149,17 @@ function productosEnCarrito(carrito) {
 
       carritoModal.append(carritoContent);
     });
-    const eliminarDelCarrito = (producto) => {
+    function eliminarDelCarrito (producto) {
       if (producto.cantidad > 1) {
         producto.cantidad--;
+        producto.stock ++;
       } else {
         const index = carrito.indexOf(producto);
         carrito.splice(index, 1);
       }
 
       productosEnCarrito(carrito);
+      contadorCarrito()
     };
 
     const totalCompra = document.createElement("div");
@@ -159,10 +176,12 @@ function productosEnCarrito(carrito) {
     totalCompra.append(comprarFin);
 
     carritoModal.append(totalCompra);
-
+    if (total > 0) {
     pagoHTML(comprarFin, total);
+    }
   });
 }
+
 
 productosEnCarrito(carrito);
 
